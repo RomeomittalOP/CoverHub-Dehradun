@@ -1,62 +1,78 @@
 import Link from "next/link";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 pt-16 pb-8 px-6">
+    <footer className="relative border-t border-white/[0.04] pt-20 pb-10 px-6">
+      {/* Ambient glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[1px] bg-gradient-to-r from-transparent via-[#007AFF]/20 to-transparent" />
+
       <div className="max-w-7xl mx-auto">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-14 mb-16">
           <div>
-            <h3 className="text-xl font-bold mb-4">
+            <h3 className="text-2xl font-black mb-5">
               <span className="text-white">Cover</span>
-              <span className="text-[#007AFF]">Hub</span>{" "}
-              <span className="text-sm font-light text-white/40">Dehradun</span>
+              <span className="text-gradient-blue">Hub</span>
             </h3>
-            <p className="text-sm text-white/40 leading-relaxed mb-4">
-              Premium iPhone cases crafted for those who demand the extraordinary.
+            <p className="text-sm text-white/25 leading-relaxed mb-6">
+              Premium iPhone cases crafted for those who demand the extraordinary. Every case tells a story of precision.
             </p>
             <div className="flex gap-3">
-              {["IG", "FB", "TW"].map((s) => (
-                <a key={s} href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/8 flex items-center justify-center text-white/40 hover:text-[#007AFF] hover:border-[#007AFF]/30 transition-all text-xs font-bold">
-                  {s}
+              {[
+                { label: "IG", href: "#" },
+                { label: "FB", href: "#" },
+                { label: "TW", href: "#" },
+              ].map((s) => (
+                <a key={s.label} href={s.href} className="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-white/30 hover:text-[#007AFF] transition-all text-[10px] font-bold tracking-wider hover:!transform-none">
+                  {s.label}
                 </a>
               ))}
             </div>
           </div>
           <div>
-            <h4 className="font-semibold mb-4 text-sm tracking-wider uppercase text-white/60">Quick Links</h4>
-            <div className="flex flex-col gap-3">
+            <h4 className="font-semibold mb-5 text-[11px] tracking-[0.2em] uppercase text-white/40">Shop</h4>
+            <div className="flex flex-col gap-3.5">
               {[
                 { name: "Shop All", href: "/shop" },
                 { name: "New Arrivals", href: "/shop" },
                 { name: "Bestsellers", href: "/shop" },
                 { name: "MagSafe Cases", href: "/collections" },
               ].map((l) => (
-                <Link key={l.name} href={l.href} className="text-sm text-white/40 hover:text-[#007AFF] transition-colors">
+                <Link key={l.name} href={l.href} className="text-sm text-white/25 hover:text-[#007AFF] transition-colors duration-300">
                   {l.name}
                 </Link>
               ))}
             </div>
           </div>
           <div>
-            <h4 className="font-semibold mb-4 text-sm tracking-wider uppercase text-white/60">Support</h4>
-            <div className="flex flex-col gap-3">
-              {["Shipping Policy", "Returns", "FAQs", "Track Order"].map((l) => (
-                <a key={l} href="#" className="text-sm text-white/40 hover:text-[#007AFF] transition-colors">{l}</a>
+            <h4 className="font-semibold mb-5 text-[11px] tracking-[0.2em] uppercase text-white/40">Support</h4>
+            <div className="flex flex-col gap-3.5">
+              {["Shipping Policy", "Returns & Exchange", "FAQs", "Track Order"].map((l) => (
+                <a key={l} href="#" className="text-sm text-white/25 hover:text-[#007AFF] transition-colors duration-300">{l}</a>
               ))}
             </div>
           </div>
           <div>
-            <h4 className="font-semibold mb-4 text-sm tracking-wider uppercase text-white/60">Contact Us</h4>
-            <div className="flex flex-col gap-3 text-sm text-white/40">
-              <p>📍 Saharanpur Chowk, Dehradun</p>
-              <a href="tel:7906220413" className="hover:text-[#007AFF] transition-colors">📞 7906220413</a>
-              <a href="mailto:av1021854@gmail.com" className="hover:text-[#007AFF] transition-colors">✉️ av1021854@gmail.com</a>
+            <h4 className="font-semibold mb-5 text-[11px] tracking-[0.2em] uppercase text-white/40">Contact</h4>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start gap-3">
+                <MapPin size={14} className="text-[#007AFF] mt-0.5 shrink-0" />
+                <p className="text-sm text-white/25">Saharanpur Chowk, Dehradun</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone size={14} className="text-[#007AFF] shrink-0" />
+                <a href="tel:7906220413" className="text-sm text-white/25 hover:text-[#007AFF] transition-colors">7906220413</a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail size={14} className="text-[#007AFF] shrink-0" />
+                <a href="mailto:av1021854@gmail.com" className="text-sm text-white/25 hover:text-[#007AFF] transition-colors">av1021854@gmail.com</a>
+              </div>
             </div>
           </div>
         </div>
-        <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30">© 2026 CoverHub Dehradun. All rights reserved.</p>
-          <p className="text-xs text-white/20">Crafted with precision ✦ Made in India</p>
+        <div className="border-t border-white/[0.04] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-[11px] text-white/15 tracking-wide">© 2026 CoverHub Dehradun. All rights reserved.</p>
+          <p className="text-[11px] text-white/10 tracking-wide">Crafted with precision ✦ Made in India</p>
         </div>
       </div>
     </footer>

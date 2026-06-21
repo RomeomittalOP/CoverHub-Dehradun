@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Star, MessageCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, MessageCircle, ArrowRight, Shield, Truck, Ruler, Magnet, Quote } from "lucide-react";
 import { collections, devices, products, reviews, features } from "@/lib/data";
 import ProductCard from "./ProductCard";
 
@@ -12,129 +12,172 @@ function SectionHeader({ label, title, subtitle }: { label?: string; title: stri
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8 }}
-      className="text-center mb-16"
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.25, 0.1, 0, 1] }}
+      className="text-center mb-20"
     >
-      {label && <p className="text-[#007AFF] text-sm font-semibold tracking-[0.2em] uppercase mb-4">{label}</p>}
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-br from-white to-white/60 bg-clip-text text-transparent mb-4">{title}</h2>
-      {subtitle && <p className="text-white/40 max-w-lg mx-auto font-light">{subtitle}</p>}
+      {label && (
+        <p className="text-[#007AFF] text-[11px] font-semibold tracking-[0.3em] uppercase mb-5">
+          — {label} —
+        </p>
+      )}
+      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] text-gradient-premium mb-5">{title}</h2>
+      {subtitle && <p className="text-white/30 max-w-md mx-auto font-light text-lg leading-relaxed">{subtitle}</p>}
     </motion.div>
   );
 }
 
 export function Collections() {
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto">
-      <SectionHeader label="Curated For You" title="Featured Collections" subtitle="Discover our handcrafted range of premium iPhone cases" />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section className="py-32 px-6 max-w-7xl mx-auto relative">
+      <SectionHeader label="Curated For You" title="Featured Collections" subtitle="Discover our handcrafted range of premium cases" />
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {collections.map((c, i) => (
           <motion.div
             key={c.id}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.15, duration: 0.6 }}
+            transition={{ delay: i * 0.12, duration: 0.7, ease: [0.25, 0.1, 0, 1] }}
           >
             <Link
               href={`/collections?filter=${c.id}`}
-              className="group relative rounded-3xl overflow-hidden block hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-400"
+              className="group relative rounded-[2rem] overflow-hidden block transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_80px_rgba(0,0,0,0.6)]"
               style={{ aspectRatio: "3/4" }}
             >
-              <Image src={c.image} alt={c.name} fill className="object-cover group-hover:scale-110 transition-transform duration-700" sizes="(max-width:640px) 100vw, 25vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <span className="text-3xl mb-3 block">{c.icon}</span>
-                <h3 className="text-xl font-bold mb-1">{c.name}</h3>
-                <p className="text-sm text-white/50 mb-4">{c.description.split(".")[0]}</p>
-                <span className="inline-flex items-center gap-2 text-[#007AFF] text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Explore →
+              <Image src={c.image} alt={c.name} fill className="object-cover group-hover:scale-110 transition-transform duration-[1.2s] ease-out" sizes="(max-width:640px) 100vw, 25vw" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10 group-hover:via-black/40 transition-all duration-700" />
+
+              {/* Top badge */}
+              <div className="absolute top-5 left-5">
+                <span className="glass-premium rounded-full px-3 py-1.5 text-[10px] font-bold tracking-wider uppercase text-white/70">
+                  {c.productCount} Products
                 </span>
               </div>
+
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <span className="text-4xl mb-3 block transform group-hover:scale-110 transition-transform duration-500">{c.icon}</span>
+                <h3 className="text-xl font-bold mb-1.5 tracking-tight">{c.name}</h3>
+                <p className="text-sm text-white/40 mb-4 line-clamp-2">{c.description.split(".")[0]}</p>
+                <div className="flex items-center gap-2 text-[#007AFF] text-sm font-semibold opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
+                  Explore Collection <ArrowRight size={14} />
+                </div>
+              </div>
+
+              {/* Hover border glow */}
+              <div className="absolute inset-0 rounded-[2rem] border border-transparent group-hover:border-[#007AFF]/20 transition-colors duration-700 pointer-events-none" />
             </Link>
           </motion.div>
         ))}
       </div>
+      <div className="section-divider mt-32" />
     </section>
   );
 }
 
 export function DeviceSelector() {
   const [selected, setSelected] = useState(4);
+  const deviceEmojis = ["📱", "📱", "📱", "📱", "✨"];
+
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#007AFF]/[0.03] to-transparent" />
+    <section className="py-32 px-6 relative overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#007AFF]/[0.03] rounded-full blur-[150px]" />
+      </div>
       <div className="max-w-7xl mx-auto relative z-10">
-        <SectionHeader label="Find Your Perfect Fit" title="Choose Your iPhone" subtitle="Select your model and discover cases made specifically for it" />
-        <div className="flex flex-wrap justify-center gap-4">
+        <SectionHeader label="Find Your Perfect Fit" title="Choose Your iPhone" subtitle="Precision-engineered for every model" />
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-5">
           {devices.map((d, i) => (
             <motion.button
               key={d}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.08 }}
               onClick={() => setSelected(i)}
-              className={`px-8 py-6 rounded-2xl transition-all duration-300 cursor-pointer text-center ${
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`relative px-8 sm:px-10 py-7 rounded-2xl transition-all duration-500 cursor-pointer text-center min-w-[130px] ${
                 selected === i
-                  ? "bg-gradient-to-r from-[#007AFF] to-[#5856D6] shadow-lg shadow-[#007AFF]/20"
-                  : "bg-white/5 backdrop-blur border border-white/[0.08] hover:bg-white/10"
+                  ? "bg-gradient-to-r from-[#007AFF] to-[#5856D6] shadow-[0_15px_40px_rgba(0,122,255,0.25)]"
+                  : "glass-card hover:!transform-none"
               }`}
             >
-              <div className="text-3xl mb-2">📱</div>
-              <p className={`font-semibold text-sm ${selected === i ? "text-white" : "text-white/60"}`}>{d}</p>
-              {selected === i && <p className="text-xs text-white/70 mt-1">{products.filter((p) => p.device.includes(d)).length} cases available</p>}
+              <div className="text-3xl mb-3">{deviceEmojis[i]}</div>
+              <p className={`font-bold text-sm tracking-tight ${selected === i ? "text-white" : "text-white/50"}`}>{d}</p>
+              {selected === i && (
+                <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="mt-2">
+                  <p className="text-[10px] text-white/80 font-medium">{products.filter((p) => p.device.includes(d)).length} cases</p>
+                </motion.div>
+              )}
+              {selected === i && (
+                <motion.div layoutId="device-indicator" className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full bg-white/60" />
+              )}
             </motion.button>
           ))}
         </div>
-        <div className="mt-8 text-center">
-          <Link href={`/shop?device=${encodeURIComponent(devices[selected])}`} className="text-[#007AFF] text-sm font-semibold hover:underline">
-            View all {devices[selected]} cases →
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center mt-10">
+          <Link href={`/shop?device=${encodeURIComponent(devices[selected])}`} className="text-[#007AFF] text-sm font-semibold hover:underline underline-offset-4 inline-flex items-center gap-2 group">
+            View all {devices[selected]} cases <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </Link>
-        </div>
+        </motion.div>
       </div>
+      <div className="section-divider mt-32 max-w-7xl mx-auto" />
     </section>
   );
 }
 
 export function TrendingProducts() {
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto">
-      <SectionHeader label="Most Popular" title="Trending Cases" subtitle="Our bestselling cases, loved by thousands" />
+    <section className="py-32 px-6 max-w-7xl mx-auto">
+      <SectionHeader label="Most Popular" title="Trending Cases" subtitle="Loved by thousands across India" />
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {products.map((p, i) => (
           <ProductCard key={p.id} product={p} index={i} />
         ))}
       </div>
-      <div className="text-center mt-12">
-        <Link href="/shop" className="bg-gradient-to-r from-[#007AFF] to-[#5856D6] px-8 py-4 rounded-2xl font-semibold text-sm text-white hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,122,255,0.3)] transition-all duration-300 inline-block">
-          View All Products
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center mt-14"
+      >
+        <Link href="/shop" className="btn-premium px-10 py-5 rounded-2xl font-semibold text-[13px] tracking-wider uppercase text-white inline-flex items-center gap-3">
+          View All Products <ArrowRight size={16} />
         </Link>
-      </div>
+      </motion.div>
+      <div className="section-divider mt-32" />
     </section>
   );
 }
 
 export function WhyCoverHub() {
+  const iconMap = [Shield, Truck, Ruler, Magnet];
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto">
-      <SectionHeader label="The CoverHub Difference" title="Why CoverHub?" subtitle="We obsess over every detail so you don't have to" />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {features.map((f, i) => (
-          <motion.div
-            key={f.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.15 }}
-            className="bg-white/[0.03] backdrop-blur border border-white/[0.06] rounded-3xl p-8 text-center hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-400 group"
-          >
-            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{f.icon}</div>
-            <h3 className="text-lg font-bold mb-2">{f.title}</h3>
-            <p className="text-sm text-white/40 leading-relaxed">{f.desc}</p>
-          </motion.div>
-        ))}
+    <section className="py-32 px-6 max-w-7xl mx-auto">
+      <SectionHeader label="The CoverHub Difference" title="Why Choose Us?" subtitle="We obsess over every detail so you don't have to" />
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {features.map((f, i) => {
+          const Icon = iconMap[i];
+          return (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.12, duration: 0.6 }}
+              className="glass-card gradient-border rounded-3xl p-8 text-center group cursor-default"
+            >
+              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#007AFF]/20 to-[#5856D6]/10 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(0,122,255,0.2)] transition-all duration-500">
+                <Icon size={28} className="text-[#007AFF]" />
+              </div>
+              <h3 className="text-lg font-bold mb-3 tracking-tight">{f.title}</h3>
+              <p className="text-sm text-white/30 leading-relaxed">{f.desc}</p>
+            </motion.div>
+          );
+        })}
       </div>
+      <div className="section-divider mt-32" />
     </section>
   );
 }
@@ -147,76 +190,100 @@ export function Reviews() {
   }, []);
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#007AFF]/[0.03] to-transparent" />
+    <section className="py-32 px-6 relative overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#007AFF]/[0.02] rounded-full blur-[120px]" />
+      </div>
       <div className="max-w-4xl mx-auto relative z-10">
-        <SectionHeader label="Testimonials" title="What Our Customers Say" />
+        <SectionHeader label="Testimonials" title="Customer Love" />
         <motion.div
           key={current}
-          initial={{ opacity: 0, x: 80 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="bg-gradient-to-br from-white/[0.05] to-white/[0.02] rounded-3xl p-8 sm:p-12 text-center border border-white/5"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="glass-card rounded-[2rem] p-10 sm:p-14 text-center relative overflow-hidden"
         >
-          <div className="flex justify-center gap-1 mb-6">
-            {[1, 2, 3, 4, 5].map((s) => (
-              <Star key={s} size={16} className={s <= reviews[current].rating ? "fill-yellow-400 text-yellow-400" : "text-white/20"} />
-            ))}
-          </div>
-          <p className="text-lg sm:text-xl text-white/70 leading-relaxed mb-8 font-light italic">
-            &ldquo;{reviews[current].text}&rdquo;
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#007AFF] to-[#5856D6] flex items-center justify-center font-bold text-sm">
-              {reviews[current].avatar}
+          {/* Decorative quote */}
+          <Quote size={80} className="absolute top-6 left-8 text-white/[0.03] rotate-180" />
+
+          <div className="relative z-10">
+            <div className="flex justify-center gap-1.5 mb-8">
+              {[1, 2, 3, 4, 5].map((s) => (
+                <Star key={s} size={18} className={`${s <= reviews[current].rating ? "fill-yellow-400 text-yellow-400" : "text-white/10"} drop-shadow-[0_0_3px_rgba(250,204,21,0.3)]`} />
+              ))}
             </div>
-            <div className="text-left">
-              <p className="font-semibold">{reviews[current].name}</p>
-              <p className="text-xs text-white/40">{reviews[current].location} · Verified Buyer</p>
+            <p className="text-xl sm:text-2xl text-white/70 leading-relaxed mb-10 font-light max-w-2xl mx-auto">
+              &ldquo;{reviews[current].text}&rdquo;
+            </p>
+            <div className="flex items-center justify-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#007AFF] to-[#5856D6] flex items-center justify-center font-bold text-sm shadow-[0_0_20px_rgba(0,122,255,0.3)]">
+                {reviews[current].avatar}
+              </div>
+              <div className="text-left">
+                <p className="font-semibold text-lg">{reviews[current].name}</p>
+                <p className="text-xs text-white/30 tracking-wide">{reviews[current].location} · Verified Buyer ✓</p>
+              </div>
             </div>
           </div>
         </motion.div>
-        <div className="flex justify-center items-center gap-4 mt-8">
-          <button onClick={() => setCurrent((c) => (c - 1 + reviews.length) % reviews.length)} className="w-10 h-10 rounded-full bg-white/5 border border-white/[0.08] flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer">
-            <ChevronLeft size={20} />
+        <div className="flex justify-center items-center gap-5 mt-10">
+          <button onClick={() => setCurrent((c) => (c - 1 + reviews.length) % reviews.length)} className="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer group hover:!transform-none">
+            <ChevronLeft size={20} className="group-hover:text-[#007AFF] transition-colors" />
           </button>
-          <div className="flex gap-2">
+          <div className="flex gap-2.5">
             {reviews.map((_, i) => (
-              <button key={i} onClick={() => setCurrent(i)} className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${i === current ? "w-8 bg-[#007AFF]" : "w-2 bg-white/20"}`} />
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className={`rounded-full transition-all duration-500 cursor-pointer ${
+                  i === current ? "w-10 h-2.5 bg-gradient-to-r from-[#007AFF] to-[#5856D6]" : "w-2.5 h-2.5 bg-white/10 hover:bg-white/20"
+                }`}
+              />
             ))}
           </div>
-          <button onClick={() => setCurrent((c) => (c + 1) % reviews.length)} className="w-10 h-10 rounded-full bg-white/5 border border-white/[0.08] flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer">
-            <ChevronRight size={20} />
+          <button onClick={() => setCurrent((c) => (c + 1) % reviews.length)} className="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer group hover:!transform-none">
+            <ChevronRight size={20} className="group-hover:text-[#007AFF] transition-colors" />
           </button>
         </div>
       </div>
+      <div className="section-divider mt-32 max-w-7xl mx-auto" />
     </section>
   );
 }
 
 export function WhatsAppBanner() {
   return (
-    <section className="py-16 px-6">
+    <section className="py-20 px-6">
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="max-w-4xl mx-auto rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #075E54 0%, #128C7E 50%, #25D366 100%)" }}
+        className="max-w-4xl mx-auto rounded-[2rem] p-10 sm:p-14 text-center relative overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #064E3B 0%, #065F46 30%, #059669 70%, #10B981 100%)" }}
       >
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/[0.05] rounded-full blur-[80px]" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/20 rounded-full blur-[60px]" />
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "24px 24px" }} />
+
         <div className="relative z-10">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
-            <MessageCircle size={32} />
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-3">Need Help Choosing The Perfect Case?</h2>
-          <p className="text-white/70 mb-8 max-w-md mx-auto">Our experts are just a message away. Get personalized recommendations instantly.</p>
+          <motion.div
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur mb-8 shadow-[0_0_40px_rgba(255,255,255,0.1)]"
+          >
+            <MessageCircle size={36} />
+          </motion.div>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 tracking-tight">Need Help Choosing?</h2>
+          <p className="text-white/70 mb-10 max-w-md mx-auto text-lg font-light">Our experts will help you find the perfect case for your iPhone</p>
           <a
             href="https://wa.me/917906220413"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-white text-[#075E54] px-8 py-4 rounded-2xl font-bold hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            className="inline-flex items-center gap-3 bg-white text-emerald-800 px-10 py-5 rounded-2xl font-bold text-[15px] hover:shadow-[0_15px_40px_rgba(255,255,255,0.2)] hover:-translate-y-1 transition-all duration-400"
           >
-            <MessageCircle size={20} />
+            <MessageCircle size={22} />
             Chat On WhatsApp
           </a>
         </div>
