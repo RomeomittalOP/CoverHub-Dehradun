@@ -2,19 +2,195 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Star, Zap } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { ParticleField, MagneticButton } from "./3d-effects";
+
+function HeroPhone() {
+  const ref = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]), { stiffness: 150, damping: 20 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-15, 15]), { stiffness: 150, damping: 20 });
+  const glareX = useSpring(useTransform(mouseX, [-0.5, 0.5], [20, 80]), { stiffness: 150, damping: 20 });
+  const glareY = useSpring(useTransform(mouseY, [-0.5, 0.5], [20, 80]), { stiffness: 150, damping: 20 });
+
+  const handleMouse = (e: React.MouseEvent) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouse}
+      onMouseLeave={() => { mouseX.set(0); mouseY.set(0); }}
+      initial={{ opacity: 0, scale: 0.7, rotateY: 30 }}
+      animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+      transition={{ delay: 0.4, duration: 1.4, ease: [0.25, 0.1, 0, 1] }}
+      className="relative flex items-center justify-center lg:ml-10 cursor-grab active:cursor-grabbing"
+      style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
+    >
+      {/* 3D orbiting rings */}
+      <div className="absolute w-[380px] h-[380px] sm:w-[480px] sm:h-[480px]" style={{ transformStyle: "preserve-3d", transform: "rotateX(75deg)", left: "50%", top: "50%", marginLeft: "-190px", marginTop: "-190px" }}>
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 rounded-full border border-[#007AFF]/10"
+        />
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-8 rounded-full border border-dashed border-purple-500/10"
+        />
+        {/* Orbiting dots on the rings */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0"
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#007AFF] shadow-[0_0_15px_rgba(0,122,255,0.8)]" />
+        </motion.div>
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-8"
+        >
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
+        </motion.div>
+      </div>
+
+      {/* Main 3D phone */}
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        className="relative"
+      >
+        {/* Phone shadow on ground */}
+        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-48 h-8 bg-[#007AFF]/10 rounded-full blur-2xl" />
+
+        {/* 3D layered phone */}
+        <div
+          className="w-60 h-80 sm:w-[300px] sm:h-[420px] rounded-[2.5rem] overflow-hidden relative"
+          style={{
+            transformStyle: "preserve-3d",
+            boxShadow: "0 50px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.1)",
+          }}
+        >
+          <Image
+            src="https://images.unsplash.com/photo-1603891128711-11b4b03bb138?w=600&q=80"
+            alt="Premium iPhone Case"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#007AFF]/10 via-transparent to-purple-600/10" />
+
+          {/* 3D Glare effect */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: useTransform(
+                [glareX, glareY],
+                ([gx, gy]) => `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.15) 0%, transparent 50%)`
+              ),
+            }}
+          />
+
+          {/* Reflection line */}
+          <motion.div
+            animate={{ x: ["-100%", "200%"] }}
+            transition={{ duration: 3, repeat: Infinity, repeatDelay: 5, ease: "easeInOut" }}
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.08) 55%, transparent 60%)" }}
+          />
+
+          {/* Price tag overlay */}
+          <div className="absolute bottom-0 left-0 right-0 p-6" style={{ transform: "translateZ(30px)" }}>
+            <div className="glass-premium rounded-2xl p-4 backdrop-blur-xl">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#007AFF] animate-pulse" />
+                <p className="text-[10px] text-[#007AFF] font-bold tracking-[0.2em] uppercase">Featured</p>
+              </div>
+              <p className="text-lg font-bold">MagSafe Pro Shield</p>
+              <div className="flex items-center justify-between mt-1">
+                <p className="text-white/60 font-semibold">₹1,499</p>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 font-semibold">25% OFF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating 3D badge — right side */}
+        <motion.div
+          animate={{ y: [-8, 8, -8], rotateZ: [-2, 2, -2] }}
+          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          className="absolute -right-8 top-10 sm:-right-14 glass-premium rounded-2xl px-4 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          style={{ transform: "translateZ(60px)", transformStyle: "preserve-3d" }}
+        >
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-r from-[#007AFF] to-[#5856D6] flex items-center justify-center shadow-[0_0_15px_rgba(0,122,255,0.4)]">
+              <Star size={14} className="fill-white text-white" />
+            </div>
+            <div>
+              <p className="text-[9px] text-white/30 uppercase tracking-wider">Rated</p>
+              <p className="text-sm font-black">4.9/5</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Floating 3D badge — left side */}
+        <motion.div
+          animate={{ y: [8, -8, 8], rotateZ: [2, -2, 2] }}
+          transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+          className="absolute -left-8 bottom-28 sm:-left-16 glass-premium rounded-2xl px-4 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          style={{ transform: "translateZ(50px)" }}
+        >
+          <div className="flex items-center gap-2.5">
+            <span className="text-xl">🧲</span>
+            <div>
+              <p className="text-[9px] text-white/30 uppercase tracking-wider">MagSafe</p>
+              <p className="text-xs font-bold text-[#007AFF]">Compatible</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Floating 3D badge — top */}
+        <motion.div
+          animate={{ y: [-5, 10, -5], x: [5, -5, 5] }}
+          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+          className="absolute -right-4 -top-8 sm:-right-8 sm:-top-10 glass-premium rounded-xl px-3 py-2 shadow-[0_15px_40px_rgba(0,0,0,0.5)]"
+          style={{ transform: "translateZ(70px)" }}
+        >
+          <div className="flex items-center gap-1.5">
+            <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span className="text-green-400 text-xs">✓</span>
+            </div>
+            <p className="text-[10px] font-semibold text-white/70">In Stock</p>
+          </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden noise-overlay">
+      {/* Particle field */}
+      <ParticleField count={50} />
+
       {/* Ambient background effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#007AFF]/[0.07] rounded-full blur-[150px] animate-gradient" style={{ background: "radial-gradient(ellipse, rgba(0,122,255,0.12) 0%, rgba(88,86,214,0.05) 50%, transparent 70%)" }} />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[700px]" style={{ background: "radial-gradient(ellipse, rgba(0,122,255,0.12) 0%, rgba(88,86,214,0.05) 40%, transparent 70%)" }} />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/[0.04] rounded-full blur-[120px]" />
         <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-[#007AFF]/[0.03] rounded-full blur-[100px]" />
       </div>
 
-      {/* Grid pattern overlay */}
+      {/* Grid pattern */}
       <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
 
       <div className="max-w-7xl mx-auto px-6 pt-32 pb-20 grid lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -38,11 +214,25 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
             className="text-5xl sm:text-6xl lg:text-[5.5rem] font-black leading-[0.95] tracking-[-0.03em] mb-8"
+            style={{ transformStyle: "preserve-3d" }}
           >
-            <span className="text-gradient-premium block">Premium</span>
+            <span className="text-gradient-premium block" style={{ textShadow: "0 0 80px rgba(255,255,255,0.1)" }}>Premium</span>
             <span className="text-gradient-premium block">iPhone Cases</span>
             <span className="block mt-2 text-white/90">Designed To</span>
-            <span className="text-gradient-blue block text-6xl sm:text-7xl lg:text-[6rem]">Stand Out</span>
+            <motion.span
+              animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="block text-6xl sm:text-7xl lg:text-[6rem]"
+              style={{
+                background: "linear-gradient(135deg, #007AFF, #5856D6, #FF2D55, #007AFF)",
+                backgroundSize: "300% 300%",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                filter: "drop-shadow(0 0 30px rgba(0,122,255,0.3))",
+              }}
+            >
+              Stand Out
+            </motion.span>
           </motion.h1>
 
           <motion.p
@@ -60,20 +250,24 @@ export default function Hero() {
             transition={{ delay: 1 }}
             className="flex flex-wrap gap-5"
           >
-            <Link
-              href="/shop"
-              className="btn-premium px-10 py-5 rounded-2xl font-semibold text-[13px] tracking-wider uppercase inline-flex items-center gap-3 text-white"
-            >
-              Shop Now <ArrowRight size={16} />
-            </Link>
-            <Link
-              href="/collections"
-              className="relative px-10 py-5 rounded-2xl font-semibold text-[13px] tracking-wider uppercase text-white/70 hover:text-white transition-all duration-500 group overflow-hidden"
-            >
-              <span className="absolute inset-0 rounded-2xl border border-white/10 group-hover:border-white/25 transition-colors duration-500" />
-              <span className="absolute inset-0 rounded-2xl bg-white/0 group-hover:bg-white/[0.04] transition-colors duration-500" />
-              <span className="relative">Explore Collections</span>
-            </Link>
+            <MagneticButton>
+              <Link
+                href="/shop"
+                className="btn-premium px-10 py-5 rounded-2xl font-semibold text-[13px] tracking-wider uppercase inline-flex items-center gap-3 text-white"
+              >
+                Shop Now <ArrowRight size={16} />
+              </Link>
+            </MagneticButton>
+            <MagneticButton>
+              <Link
+                href="/collections"
+                className="relative px-10 py-5 rounded-2xl font-semibold text-[13px] tracking-wider uppercase text-white/70 hover:text-white transition-all duration-500 group overflow-hidden block"
+              >
+                <span className="absolute inset-0 rounded-2xl border border-white/10 group-hover:border-white/25 transition-colors duration-500" />
+                <span className="absolute inset-0 rounded-2xl bg-white/0 group-hover:bg-white/[0.04] transition-colors duration-500" />
+                <span className="relative">Explore Collections</span>
+              </Link>
+            </MagneticButton>
           </motion.div>
 
           <motion.div
@@ -86,10 +280,10 @@ export default function Hero() {
               {["AK", "RS", "PM", "NJ", "VS"].map((a, i) => (
                 <motion.div
                   key={a}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.4 + i * 0.1 }}
-                  className="w-10 h-10 rounded-full border-2 border-[#050505] flex items-center justify-center text-[10px] font-bold text-white/80"
+                  initial={{ opacity: 0, scale: 0, rotateZ: -30 }}
+                  animate={{ opacity: 1, scale: 1, rotateZ: 0 }}
+                  transition={{ delay: 1.4 + i * 0.1, type: "spring" }}
+                  className="w-10 h-10 rounded-full border-2 border-[#050505] flex items-center justify-center text-[10px] font-bold text-white/80 shadow-lg"
                   style={{ background: `linear-gradient(135deg, hsl(${220 + i * 30}, 70%, 40%), hsl(${220 + i * 30}, 70%, 25%))` }}
                 >
                   {a}
@@ -109,93 +303,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Hero visual */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotateY: 20 }}
-          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-          transition={{ delay: 0.4, duration: 1.2, ease: [0.25, 0.1, 0, 1] }}
-          className="relative flex items-center justify-center lg:ml-10"
-        >
-          {/* Orbiting dots */}
-          <div className="absolute w-[360px] h-[360px] sm:w-[450px] sm:h-[450px]" style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}>
-            <div className="absolute w-3 h-3 rounded-full bg-[#007AFF]/40 blur-[2px]" style={{ animation: "orbit 15s linear infinite" }} />
-            <div className="absolute w-2 h-2 rounded-full bg-purple-400/30 blur-[1px]" style={{ animation: "orbit-reverse 20s linear infinite" }} />
-            <div className="absolute w-2 h-2 rounded-full bg-[#007AFF]/20" style={{ animation: "orbit 25s linear infinite reverse" }} />
-          </div>
-
-          {/* Decorative rings */}
-          <div className="absolute w-72 h-72 sm:w-[380px] sm:h-[380px] rounded-full border border-white/[0.03]" style={{ animation: "rotate-bg 40s linear infinite" }} />
-          <div className="absolute w-56 h-56 sm:w-[300px] sm:h-[300px] rounded-full border border-dashed border-white/[0.04]" style={{ animation: "rotate-bg 30s linear infinite reverse" }} />
-
-          {/* Main floating case */}
-          <div className="relative" style={{ animation: "float 6s ease-in-out infinite", perspective: "1200px" }}>
-            <div
-              className="w-60 h-80 sm:w-[300px] sm:h-[420px] rounded-[2.5rem] overflow-hidden relative"
-              style={{
-                transform: "rotateY(-12deg) rotateX(5deg)",
-                animation: "glow 4s ease-in-out infinite",
-                boxShadow: "0 50px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05)",
-              }}
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1603891128711-11b4b03bb138?w=600&q=80"
-                alt="Premium iPhone Case"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-br from-[#007AFF]/10 via-transparent to-purple-600/10" />
-
-              {/* Price tag overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-7">
-                <div className="glass-premium rounded-2xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#007AFF]" />
-                    <p className="text-[10px] text-[#007AFF] font-bold tracking-[0.2em] uppercase">Featured</p>
-                  </div>
-                  <p className="text-lg font-bold">MagSafe Pro Shield</p>
-                  <div className="flex items-center justify-between mt-1">
-                    <p className="text-white/60 font-semibold">₹1,499</p>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 font-semibold">25% OFF</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating badge */}
-            <motion.div
-              animate={{ y: [-5, 5, -5] }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-              className="absolute -right-6 top-12 sm:-right-10 glass-premium rounded-2xl px-4 py-3 shadow-2xl"
-            >
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#007AFF] to-[#5856D6] flex items-center justify-center">
-                  <Star size={14} className="fill-white text-white" />
-                </div>
-                <div>
-                  <p className="text-[10px] text-white/40">Rated</p>
-                  <p className="text-sm font-bold">4.9/5</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Floating badge left */}
-            <motion.div
-              animate={{ y: [5, -5, 5] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -left-6 bottom-32 sm:-left-12 glass-premium rounded-2xl px-4 py-3 shadow-2xl"
-            >
-              <div className="flex items-center gap-2">
-                <span className="text-lg">🧲</span>
-                <div>
-                  <p className="text-[10px] text-white/40">MagSafe</p>
-                  <p className="text-xs font-bold text-[#007AFF]">Ready</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
+        <HeroPhone />
       </div>
 
       {/* Scroll indicator */}
@@ -208,7 +316,6 @@ export default function Hero() {
         <p className="text-[10px] text-white/20 tracking-[0.3em] uppercase">Scroll</p>
       </div>
 
-      {/* Bottom gradient line */}
       <div className="absolute bottom-0 left-0 right-0 section-divider" />
     </section>
   );
