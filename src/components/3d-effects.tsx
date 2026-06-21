@@ -93,7 +93,7 @@ export function ParticleField({ count = 40 }: { count?: number }) {
             top: `${p.y}%`,
             width: p.size,
             height: p.size,
-            background: i % 3 === 0 ? "#007AFF" : i % 3 === 1 ? "#5856D6" : "#ffffff",
+            background: i % 3 === 0 ? "#ffffff" : i % 3 === 1 ? "#888888" : "#cccccc",
             opacity: p.opacity,
           }}
           animate={{

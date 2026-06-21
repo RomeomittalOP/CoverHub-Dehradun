@@ -38,28 +38,27 @@ function HeroPhone() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 rounded-full border border-[#007AFF]/10"
+          className="absolute inset-0 rounded-full border border-white/[0.08]"
         />
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-8 rounded-full border border-dashed border-purple-500/10"
+          className="absolute inset-8 rounded-full border border-dashed border-white/[0.06]"
         />
-        {/* Orbiting dots on the rings */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
           className="absolute inset-0"
           style={{ transformStyle: "preserve-3d" }}
         >
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#007AFF] shadow-[0_0_15px_rgba(0,122,255,0.8)]" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.6)]" />
         </motion.div>
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
           className="absolute inset-8"
         >
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full bg-white/60 shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
         </motion.div>
       </div>
 
@@ -68,10 +67,8 @@ function HeroPhone() {
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="relative"
       >
-        {/* Phone shadow on ground */}
-        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-48 h-8 bg-[#007AFF]/10 rounded-full blur-2xl" />
+        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-48 h-8 bg-white/5 rounded-full blur-2xl" />
 
-        {/* 3D layered phone */}
         <div
           className="w-60 h-80 sm:w-[300px] sm:h-[420px] rounded-[2.5rem] overflow-hidden relative"
           style={{
@@ -87,9 +84,8 @@ function HeroPhone() {
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#007AFF]/10 via-transparent to-purple-600/10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] via-transparent to-white/[0.03]" />
 
-          {/* 3D Glare effect */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -100,7 +96,6 @@ function HeroPhone() {
             }}
           />
 
-          {/* Reflection line */}
           <motion.div
             animate={{ x: ["-100%", "200%"] }}
             transition={{ duration: 3, repeat: Infinity, repeatDelay: 5, ease: "easeInOut" }}
@@ -108,17 +103,16 @@ function HeroPhone() {
             style={{ background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.08) 55%, transparent 60%)" }}
           />
 
-          {/* Price tag overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-6" style={{ transform: "translateZ(30px)" }}>
             <div className="glass-premium rounded-2xl p-4 backdrop-blur-xl">
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#007AFF] animate-pulse" />
-                <p className="text-[10px] text-[#007AFF] font-bold tracking-[0.2em] uppercase">Featured</p>
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                <p className="text-[10px] text-white/70 font-bold tracking-[0.2em] uppercase">Featured</p>
               </div>
               <p className="text-lg font-bold">MagSafe Pro Shield</p>
               <div className="flex items-center justify-between mt-1">
                 <p className="text-white/60 font-semibold">₹1,499</p>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 font-semibold">25% OFF</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-white/70 font-semibold">25% OFF</span>
               </div>
             </div>
           </div>
@@ -132,8 +126,8 @@ function HeroPhone() {
           style={{ transform: "translateZ(60px)", transformStyle: "preserve-3d" }}
         >
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-r from-[#007AFF] to-[#5856D6] flex items-center justify-center shadow-[0_0_15px_rgba(0,122,255,0.4)]">
-              <Star size={14} className="fill-white text-white" />
+            <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+              <Star size={14} className="fill-black text-black" />
             </div>
             <div>
               <p className="text-[9px] text-white/30 uppercase tracking-wider">Rated</p>
@@ -153,7 +147,7 @@ function HeroPhone() {
             <span className="text-xl">🧲</span>
             <div>
               <p className="text-[9px] text-white/30 uppercase tracking-wider">MagSafe</p>
-              <p className="text-xs font-bold text-[#007AFF]">Compatible</p>
+              <p className="text-xs font-bold text-white">Compatible</p>
             </div>
           </div>
         </motion.div>
@@ -166,8 +160,8 @@ function HeroPhone() {
           style={{ transform: "translateZ(70px)" }}
         >
           <div className="flex items-center gap-1.5">
-            <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
-              <span className="text-green-400 text-xs">✓</span>
+            <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">
+              <span className="text-white text-xs">✓</span>
             </div>
             <p className="text-[10px] font-semibold text-white/70">In Stock</p>
           </div>
@@ -180,17 +174,14 @@ function HeroPhone() {
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden noise-overlay">
-      {/* Particle field */}
       <ParticleField count={50} />
 
-      {/* Ambient background effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[700px]" style={{ background: "radial-gradient(ellipse, rgba(0,122,255,0.12) 0%, rgba(88,86,214,0.05) 40%, transparent 70%)" }} />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/[0.04] rounded-full blur-[120px]" />
-        <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-[#007AFF]/[0.03] rounded-full blur-[100px]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[700px]" style={{ background: "radial-gradient(ellipse, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 40%, transparent 70%)" }} />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/[0.015] rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-white/[0.01] rounded-full blur-[100px]" />
       </div>
 
-      {/* Grid pattern */}
       <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
 
       <div className="max-w-7xl mx-auto px-6 pt-32 pb-20 grid lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -202,11 +193,11 @@ export default function Hero() {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-premium text-xs text-white/70 mb-8 group cursor-default"
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/60 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
             </span>
             Now available for iPhone 16 Series
-            <Zap size={12} className="text-[#007AFF] group-hover:text-yellow-400 transition-colors" />
+            <Zap size={12} className="text-white/50 group-hover:text-white transition-colors" />
           </motion.div>
 
           <motion.h1
@@ -216,19 +207,19 @@ export default function Hero() {
             className="text-5xl sm:text-6xl lg:text-[5.5rem] font-black leading-[0.95] tracking-[-0.03em] mb-8"
             style={{ transformStyle: "preserve-3d" }}
           >
-            <span className="text-gradient-premium block" style={{ textShadow: "0 0 80px rgba(255,255,255,0.1)" }}>Premium</span>
-            <span className="text-gradient-premium block">iPhone Cases</span>
-            <span className="block mt-2 text-white/90">Designed To</span>
+            <span className="text-white block" style={{ textShadow: "0 0 80px rgba(255,255,255,0.1)" }}>Premium</span>
+            <span className="text-white block">iPhone Cases</span>
+            <span className="block mt-2 text-white/60">Designed To</span>
             <motion.span
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-              transition={{ duration: 4, repeat: Infinity }}
+              transition={{ duration: 6, repeat: Infinity }}
               className="block text-6xl sm:text-7xl lg:text-[6rem]"
               style={{
-                background: "linear-gradient(135deg, #007AFF, #5856D6, #FF2D55, #007AFF)",
+                background: "linear-gradient(90deg, #ffffff, #666666, #ffffff, #666666, #ffffff)",
                 backgroundSize: "300% 300%",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                filter: "drop-shadow(0 0 30px rgba(0,122,255,0.3))",
+                filter: "drop-shadow(0 0 30px rgba(255,255,255,0.15))",
               }}
             >
               Stand Out
@@ -239,7 +230,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="text-xl sm:text-2xl text-white/40 mb-12 max-w-lg font-extralight tracking-[0.15em] uppercase"
+            className="text-xl sm:text-2xl text-white/30 mb-12 max-w-lg font-extralight tracking-[0.15em] uppercase"
           >
             Luxury&ensp;·&ensp;Protection&ensp;·&ensp;Style
           </motion.p>
@@ -253,7 +244,7 @@ export default function Hero() {
             <MagneticButton>
               <Link
                 href="/shop"
-                className="btn-premium px-10 py-5 rounded-2xl font-semibold text-[13px] tracking-wider uppercase inline-flex items-center gap-3 text-white"
+                className="btn-premium px-10 py-5 rounded-2xl font-semibold text-[13px] tracking-wider uppercase inline-flex items-center gap-3"
               >
                 Shop Now <ArrowRight size={16} />
               </Link>
@@ -263,7 +254,7 @@ export default function Hero() {
                 href="/collections"
                 className="relative px-10 py-5 rounded-2xl font-semibold text-[13px] tracking-wider uppercase text-white/70 hover:text-white transition-all duration-500 group overflow-hidden block"
               >
-                <span className="absolute inset-0 rounded-2xl border border-white/10 group-hover:border-white/25 transition-colors duration-500" />
+                <span className="absolute inset-0 rounded-2xl border border-white/15 group-hover:border-white/30 transition-colors duration-500" />
                 <span className="absolute inset-0 rounded-2xl bg-white/0 group-hover:bg-white/[0.04] transition-colors duration-500" />
                 <span className="relative">Explore Collections</span>
               </Link>
@@ -284,7 +275,7 @@ export default function Hero() {
                   animate={{ opacity: 1, scale: 1, rotateZ: 0 }}
                   transition={{ delay: 1.4 + i * 0.1, type: "spring" }}
                   className="w-10 h-10 rounded-full border-2 border-[#050505] flex items-center justify-center text-[10px] font-bold text-white/80 shadow-lg"
-                  style={{ background: `linear-gradient(135deg, hsl(${220 + i * 30}, 70%, 40%), hsl(${220 + i * 30}, 70%, 25%))` }}
+                  style={{ background: `linear-gradient(135deg, hsl(${i * 15}, 0%, ${30 + i * 8}%), hsl(${i * 15}, 0%, ${18 + i * 5}%))` }}
                 >
                   {a}
                 </motion.div>
@@ -293,7 +284,7 @@ export default function Hero() {
             <div>
               <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} size={14} className="fill-yellow-400 text-yellow-400 drop-shadow-[0_0_3px_rgba(250,204,21,0.4)]" />
+                  <Star key={i} size={14} className="fill-white text-white drop-shadow-[0_0_3px_rgba(255,255,255,0.3)]" />
                 ))}
               </div>
               <p className="text-xs text-white/30 mt-1.5 tracking-wide">
@@ -306,7 +297,6 @@ export default function Hero() {
         <HeroPhone />
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
         <motion.div
           animate={{ y: [0, 8, 0] }}

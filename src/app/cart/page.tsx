@@ -17,7 +17,7 @@ export default function CartPage() {
           <p className="text-white/40 mb-8">Looks like you haven&apos;t added any cases yet</p>
           <Link
             href="/shop"
-            className="bg-gradient-to-r from-[#007AFF] to-[#5856D6] px-8 py-4 rounded-2xl font-semibold text-sm text-white hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,122,255,0.3)] transition-all duration-300 inline-block"
+            className="bg-gradient-to-r from-white to-white/70 px-8 py-4 rounded-2xl font-semibold text-sm text-white hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(255,255,255,0.15)] transition-all duration-300 inline-block"
           >
             Start Shopping
           </Link>
@@ -55,7 +55,7 @@ export default function CartPage() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <Link href={`/product/${item.product.id}`} className="font-semibold hover:text-[#007AFF] transition-colors">
+                    <Link href={`/product/${item.product.id}`} className="font-semibold hover:text-white/60 transition-colors">
                       {item.product.name}
                     </Link>
                     <p className="text-xs text-white/40 mt-1 capitalize">{item.product.collection} Collection</p>

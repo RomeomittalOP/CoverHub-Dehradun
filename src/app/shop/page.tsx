@@ -23,7 +23,7 @@ export default function ShopPage() {
   return (
     <div className="pt-28 pb-24 px-6 max-w-7xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
-        <p className="text-[#007AFF] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Our Collection</p>
+        <p className="text-white/60 text-sm font-semibold tracking-[0.2em] uppercase mb-4">Our Collection</p>
         <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-br from-white to-white/60 bg-clip-text text-transparent mb-4">Shop All Cases</h1>
         <p className="text-white/40 font-light">{filtered.length} products</p>
       </motion.div>
@@ -36,7 +36,7 @@ export default function ShopPage() {
           <select
             value={selectedCollection}
             onChange={(e) => setSelectedCollection(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm text-white/80 cursor-pointer focus:outline-none focus:border-[#007AFF]/50"
+            className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm text-white/80 cursor-pointer focus:outline-none focus:border-[#ffffff]/50"
           >
             <option value="all">All Collections</option>
             {collections.map((c) => (
@@ -46,7 +46,7 @@ export default function ShopPage() {
           <select
             value={selectedDevice}
             onChange={(e) => setSelectedDevice(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm text-white/80 cursor-pointer focus:outline-none focus:border-[#007AFF]/50"
+            className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm text-white/80 cursor-pointer focus:outline-none focus:border-[#ffffff]/50"
           >
             <option value="all">All Devices</option>
             {devices.map((d) => (
@@ -57,7 +57,7 @@ export default function ShopPage() {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm text-white/80 cursor-pointer focus:outline-none focus:border-[#007AFF]/50"
+          className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm text-white/80 cursor-pointer focus:outline-none focus:border-[#ffffff]/50"
         >
           <option value="featured">Featured</option>
           <option value="price-low">Price: Low to High</option>

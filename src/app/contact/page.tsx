@@ -6,7 +6,7 @@ export default function ContactPage() {
   return (
     <div className="pt-28 pb-24 px-6 max-w-5xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
-        <p className="text-[#007AFF] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Get In Touch</p>
+        <p className="text-white/60 text-sm font-semibold tracking-[0.2em] uppercase mb-4">Get In Touch</p>
         <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-br from-white to-white/60 bg-clip-text text-transparent mb-4">Contact Us</h1>
         <p className="text-white/40 font-light max-w-lg mx-auto">Have a question? We&apos;d love to hear from you.</p>
       </motion.div>
@@ -20,13 +20,13 @@ export default function ContactPage() {
             { icon: Clock, label: "Working Hours", value: "Mon - Sat: 10AM - 8PM" },
           ].map((item) => (
             <div key={item.label} className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#007AFF]/10 flex items-center justify-center shrink-0">
-                <item.icon size={20} className="text-[#007AFF]" />
+              <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                <item.icon size={20} className="text-white/60" />
               </div>
               <div>
                 <p className="text-sm text-white/40 mb-1">{item.label}</p>
                 {item.href ? (
-                  <a href={item.href} className="font-semibold hover:text-[#007AFF] transition-colors">{item.value}</a>
+                  <a href={item.href} className="font-semibold hover:text-white/60 transition-colors">{item.value}</a>
                 ) : (
                   <p className="font-semibold">{item.value}</p>
                 )}
@@ -49,15 +49,15 @@ export default function ContactPage() {
             className="space-y-4"
           >
             <input name="name" type="text" placeholder="Your Name" required
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#007AFF]/50 placeholder:text-white/30" />
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#ffffff]/50 placeholder:text-white/30" />
             <input name="phone" type="tel" placeholder="Phone Number" required
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#007AFF]/50 placeholder:text-white/30" />
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#ffffff]/50 placeholder:text-white/30" />
             <input name="email" type="email" placeholder="Email Address"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#007AFF]/50 placeholder:text-white/30" />
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#ffffff]/50 placeholder:text-white/30" />
             <textarea name="message" placeholder="Your Message" rows={4} required
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#007AFF]/50 placeholder:text-white/30 resize-none" />
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#ffffff]/50 placeholder:text-white/30 resize-none" />
             <button type="submit"
-              className="w-full bg-gradient-to-r from-[#007AFF] to-[#5856D6] py-4 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,122,255,0.3)] transition-all duration-300 cursor-pointer">
+              className="w-full bg-gradient-to-r from-white to-white/70 py-4 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(255,255,255,0.15)] transition-all duration-300 cursor-pointer">
               <MessageCircle size={18} /> Send via WhatsApp
             </button>
           </form>

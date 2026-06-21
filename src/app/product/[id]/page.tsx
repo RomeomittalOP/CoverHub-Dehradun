@@ -21,7 +21,7 @@ export default function ProductPage() {
     return (
       <div className="pt-32 pb-24 text-center">
         <h1 className="text-2xl font-bold mb-4">Product not found</h1>
-        <Link href="/shop" className="text-[#007AFF] hover:underline">← Back to shop</Link>
+        <Link href="/shop" className="text-white/60 hover:underline">← Back to shop</Link>
       </div>
     );
   }
@@ -52,7 +52,7 @@ export default function ProductPage() {
               sizes="(max-width:1024px) 100vw, 50vw"
             />
             {product.tag && (
-              <span className="absolute top-4 left-4 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-[#007AFF] to-[#5856D6] text-white">
+              <span className="absolute top-4 left-4 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-white to-white/70 text-white">
                 {product.tag}
               </span>
             )}
@@ -63,7 +63,7 @@ export default function ProductPage() {
                 key={i}
                 onClick={() => setSelectedImage(i)}
                 className={`relative w-20 h-20 rounded-xl overflow-hidden cursor-pointer transition-all ${
-                  selectedImage === i ? "ring-2 ring-[#007AFF]" : "opacity-50 hover:opacity-80"
+                  selectedImage === i ? "ring-2 ring-[#ffffff]" : "opacity-50 hover:opacity-80"
                 }`}
               >
                 <Image src={img} alt="" fill className="object-cover" sizes="80px" />
@@ -73,7 +73,7 @@ export default function ProductPage() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
-          <p className="text-[#007AFF] text-sm font-semibold tracking-wider uppercase mb-2">
+          <p className="text-white/60 text-sm font-semibold tracking-wider uppercase mb-2">
             {product.collection.charAt(0).toUpperCase() + product.collection.slice(1)} Collection
           </p>
           <h1 className="text-3xl sm:text-4xl font-bold mb-4">{product.name}</h1>
@@ -106,7 +106,7 @@ export default function ProductPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {product.features.map((f) => (
                 <div key={f} className="flex items-center gap-2 text-sm text-white/70">
-                  <Check size={14} className="text-[#007AFF] shrink-0" /> {f}
+                  <Check size={14} className="text-white/60 shrink-0" /> {f}
                 </div>
               ))}
             </div>
@@ -138,7 +138,7 @@ export default function ProductPage() {
               className={`flex-1 py-4 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer ${
                 added
                   ? "bg-green-500 text-white"
-                  : "bg-gradient-to-r from-[#007AFF] to-[#5856D6] text-white hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,122,255,0.3)]"
+                  : "bg-gradient-to-r from-white to-white/70 text-white hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(255,255,255,0.15)]"
               }`}
             >
               {added ? <><Check size={18} /> Added to Cart</> : <><ShoppingBag size={18} /> Add to Cart — ₹{(product.price * quantity).toLocaleString()}</>}
@@ -146,8 +146,8 @@ export default function ProductPage() {
           </div>
 
           <div className="flex gap-6 text-sm text-white/40">
-            <div className="flex items-center gap-2"><Truck size={16} className="text-[#007AFF]" /> Free delivery in Dehradun</div>
-            <div className="flex items-center gap-2"><Shield size={16} className="text-[#007AFF]" /> 30-day warranty</div>
+            <div className="flex items-center gap-2"><Truck size={16} className="text-white/60" /> Free delivery in Dehradun</div>
+            <div className="flex items-center gap-2"><Shield size={16} className="text-white/60" /> 30-day warranty</div>
           </div>
         </motion.div>
       </div>

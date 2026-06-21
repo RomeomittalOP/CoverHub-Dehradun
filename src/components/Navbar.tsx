@@ -39,7 +39,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link href="/" className="text-xl font-black tracking-tight group">
             <span className="text-white group-hover:text-white/90 transition-colors">Cover</span>
-            <span className="text-gradient-blue">Hub</span>
+            <span className="text-white/60">Hub</span>
             <span className="text-[10px] font-light text-white/25 ml-1.5 hidden sm:inline tracking-[0.15em] uppercase">
               Dehradun
             </span>
@@ -53,7 +53,7 @@ export default function Navbar() {
                 className="text-[13px] text-white/50 hover:text-white transition-all duration-300 relative group tracking-wide"
               >
                 {l.name}
-                <span className="absolute -bottom-1.5 left-0 w-0 h-[1.5px] bg-gradient-to-r from-[#007AFF] to-[#5856D6] group-hover:w-full transition-all duration-500" />
+                <span className="absolute -bottom-1.5 left-0 w-0 h-[1.5px] bg-gradient-to-r from-white to-white/80 group-hover:w-full transition-all duration-500" />
               </Link>
             ))}
           </div>
@@ -71,7 +71,7 @@ export default function Navbar() {
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute -top-2.5 -right-2.5 w-5 h-5 bg-gradient-to-r from-[#007AFF] to-[#5856D6] rounded-full text-[9px] flex items-center justify-center font-bold shadow-[0_0_10px_rgba(0,122,255,0.4)]"
+                  className="absolute -top-2.5 -right-2.5 w-5 h-5 bg-gradient-to-r from-white to-white/80 rounded-full text-[9px] flex items-center justify-center font-bold shadow-[0_0_10px_rgba(255,255,255,0.3)]"
                 >
                   {totalItems}
                 </motion.span>

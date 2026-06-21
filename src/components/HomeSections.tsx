@@ -18,7 +18,7 @@ function SectionHeader({ label, title, subtitle }: { label?: string; title: stri
       className="text-center mb-20"
     >
       {label && (
-        <p className="text-[#007AFF] text-[11px] font-semibold tracking-[0.3em] uppercase mb-5">— {label} —</p>
+        <p className="text-white/60 text-[11px] font-semibold tracking-[0.3em] uppercase mb-5">— {label} —</p>
       )}
       <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] text-gradient-premium mb-5">{title}</h2>
       {subtitle && <p className="text-white/30 max-w-md mx-auto font-light text-lg leading-relaxed">{subtitle}</p>}
@@ -68,12 +68,12 @@ export function Collections() {
                   <span className="text-4xl mb-3 block transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-500">{c.icon}</span>
                   <h3 className="text-xl font-bold mb-1.5 tracking-tight">{c.name}</h3>
                   <p className="text-sm text-white/40 mb-4 line-clamp-2">{c.description.split(".")[0]}</p>
-                  <div className="flex items-center gap-2 text-[#007AFF] text-sm font-semibold opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
+                  <div className="flex items-center gap-2 text-white/60 text-sm font-semibold opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
                     Explore Collection <ArrowRight size={14} />
                   </div>
                 </div>
 
-                <div className="absolute inset-0 rounded-[2rem] border border-transparent group-hover:border-[#007AFF]/20 transition-colors duration-700 pointer-events-none" />
+                <div className="absolute inset-0 rounded-[2rem] border border-transparent group-hover:border-white/15 transition-colors duration-700 pointer-events-none" />
               </Link>
             </TiltCard>
           </motion.div>
@@ -90,7 +90,7 @@ export function DeviceSelector() {
   return (
     <section className="py-32 px-6 relative overflow-hidden">
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#007AFF]/[0.03] rounded-full blur-[150px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.03] rounded-full blur-[150px]" />
       </div>
       <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeader label="Find Your Perfect Fit" title="Choose Your iPhone" subtitle="Precision-engineered for every model" />
@@ -107,7 +107,7 @@ export function DeviceSelector() {
               whileTap={{ scale: 0.95 }}
               className={`relative px-8 sm:px-10 py-7 rounded-2xl transition-all duration-500 cursor-pointer text-center min-w-[130px] ${
                 selected === i
-                  ? "bg-gradient-to-r from-[#007AFF] to-[#5856D6] shadow-[0_20px_50px_rgba(0,122,255,0.3)]"
+                  ? "bg-gradient-to-r from-white to-white/70 shadow-[0_20px_50px_rgba(255,255,255,0.3)]"
                   : "glass-card hover:!transform-none"
               }`}
             >
@@ -125,7 +125,7 @@ export function DeviceSelector() {
           ))}
         </div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center mt-10">
-          <Link href={`/shop?device=${encodeURIComponent(devices[selected])}`} className="text-[#007AFF] text-sm font-semibold hover:underline underline-offset-4 inline-flex items-center gap-2 group">
+          <Link href={`/shop?device=${encodeURIComponent(devices[selected])}`} className="text-white/60 text-sm font-semibold hover:underline underline-offset-4 inline-flex items-center gap-2 group">
             View all {devices[selected]} cases <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
@@ -163,8 +163,8 @@ export function TrendingProducts() {
 
 export function WhyCoverHub() {
   const iconMap = [Shield, Truck, Ruler, Magnet];
-  const colors = ["from-blue-500/20 to-blue-600/10", "from-green-500/20 to-green-600/10", "from-purple-500/20 to-purple-600/10", "from-orange-500/20 to-orange-600/10"];
-  const glowColors = ["rgba(59,130,246,0.3)", "rgba(34,197,94,0.3)", "rgba(168,85,247,0.3)", "rgba(249,115,22,0.3)"];
+  const colors = ["from-white/15 to-white/5", "from-white/12 to-white/4", "from-white/10 to-white/3", "from-white/8 to-white/2"];
+  const glowColors = ["rgba(255,255,255,0.15)", "rgba(255,255,255,0.12)", "rgba(255,255,255,0.1)", "rgba(255,255,255,0.08)"];
 
   return (
     <section className="py-32 px-6 max-w-7xl mx-auto relative">
@@ -190,7 +190,7 @@ export function WhyCoverHub() {
                 <div className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${colors[i]} flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_30px_${glowColors[i]}] transition-all duration-500 relative z-10`}
                   style={{ transformStyle: "preserve-3d", transform: "translateZ(20px)" }}
                 >
-                  <Icon size={28} className="text-[#007AFF]" />
+                  <Icon size={28} className="text-white/60" />
                 </div>
                 <h3 className="text-lg font-bold mb-3 tracking-tight relative z-10">{f.title}</h3>
                 <p className="text-sm text-white/30 leading-relaxed relative z-10">{f.desc}</p>
@@ -215,7 +215,7 @@ export function Reviews() {
     <section className="py-32 px-6 relative overflow-hidden">
       <ParticleField count={20} />
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#007AFF]/[0.02] rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[120px]" />
       </div>
       <div className="max-w-4xl mx-auto relative z-10">
         <SectionHeader label="Testimonials" title="Customer Love" />
@@ -253,7 +253,7 @@ export function Reviews() {
                       className="w-14 h-14 rounded-full flex items-center justify-center font-bold text-sm relative"
                       style={{ transformStyle: "preserve-3d" }}
                     >
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#007AFF] to-[#5856D6] shadow-[0_0_20px_rgba(0,122,255,0.3)]" />
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white to-white/70 shadow-[0_0_20px_rgba(255,255,255,0.3)]" />
                       <span className="relative z-10">{reviews[current].avatar}</span>
                     </motion.div>
                     <div className="text-left">
@@ -269,7 +269,7 @@ export function Reviews() {
         <div className="flex justify-center items-center gap-5 mt-10">
           <MagneticButton>
             <button onClick={() => setCurrent((c) => (c - 1 + reviews.length) % reviews.length)} className="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer group hover:!transform-none">
-              <ChevronLeft size={20} className="group-hover:text-[#007AFF] transition-colors" />
+              <ChevronLeft size={20} className="group-hover:text-white/60 transition-colors" />
             </button>
           </MagneticButton>
           <div className="flex gap-2.5">
@@ -278,14 +278,14 @@ export function Reviews() {
                 key={i}
                 onClick={() => setCurrent(i)}
                 className={`rounded-full transition-all duration-500 cursor-pointer ${
-                  i === current ? "w-10 h-2.5 bg-gradient-to-r from-[#007AFF] to-[#5856D6] shadow-[0_0_10px_rgba(0,122,255,0.3)]" : "w-2.5 h-2.5 bg-white/10 hover:bg-white/20"
+                  i === current ? "w-10 h-2.5 bg-gradient-to-r from-white to-white/70 shadow-[0_0_10px_rgba(255,255,255,0.3)]" : "w-2.5 h-2.5 bg-white/10 hover:bg-white/20"
                 }`}
               />
             ))}
           </div>
           <MagneticButton>
             <button onClick={() => setCurrent((c) => (c + 1) % reviews.length)} className="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer group hover:!transform-none">
-              <ChevronRight size={20} className="group-hover:text-[#007AFF] transition-colors" />
+              <ChevronRight size={20} className="group-hover:text-white/60 transition-colors" />
             </button>
           </MagneticButton>
         </div>

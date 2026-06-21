@@ -17,7 +17,7 @@ function CollectionsContent() {
   return (
     <div className="pt-28 pb-24 px-6 max-w-7xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
-        <p className="text-[#007AFF] text-sm font-semibold tracking-[0.2em] uppercase mb-4">Browse By Category</p>
+        <p className="text-white/60 text-sm font-semibold tracking-[0.2em] uppercase mb-4">Browse By Category</p>
         <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-br from-white to-white/60 bg-clip-text text-transparent mb-4">Collections</h1>
       </motion.div>
 
@@ -27,7 +27,7 @@ function CollectionsContent() {
             <button
               onClick={() => setActiveFilter(c.id === activeFilter ? "all" : c.id)}
               className={`w-full group relative rounded-3xl overflow-hidden block text-left cursor-pointer transition-all duration-400 ${
-                activeFilter === c.id ? "ring-2 ring-[#007AFF]" : ""
+                activeFilter === c.id ? "ring-2 ring-[#ffffff]" : ""
               }`}
               style={{ aspectRatio: "4/3" }}
             >

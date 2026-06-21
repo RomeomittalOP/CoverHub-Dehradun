@@ -34,7 +34,7 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
             />
             {/* 3D depth layers */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-br from-[#007AFF]/5 via-transparent to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
             {/* Reflection sweep */}
             <motion.div
@@ -45,7 +45,7 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
             />
 
             {product.tag && (
-              <span className="absolute top-3 left-3 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-gradient-to-r from-[#007AFF] to-[#5856D6] text-white shadow-[0_4px_15px_rgba(0,122,255,0.3)]">
+              <span className="absolute top-3 left-3 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white text-black shadow-[0_4px_15px_rgba(255,255,255,0.2)]">
                 {product.tag}
               </span>
             )}
